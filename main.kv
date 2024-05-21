@@ -1,0 +1,64 @@
+WindowManager:
+    ChatScreen:
+    SettingsScreen:
+
+<ChatScreen>:
+    name: 'chat_screen'
+    MDScreen:
+        md_bg_color: self.theme_cls.backgroundColor
+
+        MDBoxLayout:
+            orientation: 'vertical'
+
+            MDTopAppBar:
+                type: "small"
+                MDTopAppBarLeadingButtonContainer:
+                    MDActionTopAppBarButton:
+                        icon: "menu"
+
+            Image:
+                id: animation
+                opacity: 1
+                color: app.theme_cls.primaryColor
+                source: "res/anim/idle.zip"
+                anim_loop: 0
+                anim_delay: 0.02
+                size_hint: 0.35, 0.35
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+
+
+
+
+            MDScrollView:
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: self.minimum_height
+                    id: message_list
+
+            MDBoxLayout:
+                spacing: "8dp"
+                padding: "8dp"
+                orientation: 'horizontal'
+                adaptive_height: True
+                MDTextField:
+                    id: text_field
+                    padding: "8dp"
+                    mode: "outlined"
+                    max_height: "200dp"
+                    multiline: True
+                    on_text: app.on_text_changed()
+                MDIconButton:
+                    id: send_button
+                    icon: "send"
+                    style: "filled"
+                    pos_hint: {"center_y": .5}
+                    on_release: app.on_send_button()
+                    disabled: True
+
+
+<SettingsScreen>:
+    name: 'settings_screen'
+    MDScreen:
+        md_bg_color: self.theme_cls.backgroundColor
