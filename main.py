@@ -1,5 +1,7 @@
 import re
 
+from kivy.core.audio import SoundLoader
+
 from platform_features import WindowsFeature
 from kivy.config import Config
 from win32api import GetMonitorInfo, MonitorFromPoint
@@ -24,7 +26,7 @@ from kivy.core.window import Window
 import darkdetect
 from kivy.animation import Animation
 from kivy.clock import mainthread
-
+import tts
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
@@ -96,7 +98,6 @@ class App(MDApp):
         code = None
         if match:
             code = match.group(1)
-        print("cccccc", code)
         if code is not None:
             message = message.replace(f"<python>{code}</python>", "")
 
@@ -106,6 +107,10 @@ class App(MDApp):
             orientation="vertical", adaptive_height=True, spacing="8dp", padding="8dp"
         )
         w.add_widget(MDLabel(text="Вы" if from_user else "Бот", adaptive_height=True))
+        #if not from_user:
+            #path = tts.synth(message)
+            #sound = SoundLoader.load(path)
+            #sound.play()
         w.add_widget(MDLabel(text=message, adaptive_height=True))
 
         if (code is not None):
