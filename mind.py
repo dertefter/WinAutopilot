@@ -153,9 +153,9 @@ class Mind:
         try:
             response = self.client.chat.completions.create(
                 #model="command-r+",
-                #provider=Provider.OpenaiChat,
-                model="gpt-4o",
-                #model="gpt-3-turbo",
+                provider=Provider.FreeGpt,
+                #model="gpt-4o",
+                model="gpt-3-turbo",
                 messages=self.messages,
             )
             if re.search(pattern_code, response.choices[0].message.content, re.DOTALL):
